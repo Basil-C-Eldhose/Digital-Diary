@@ -69,5 +69,25 @@ namespace DiaryBackEnd.Controllers
             return Ok(cu);
         }
 
+
+        //public IActionResult deleteentry(Entry cu)
+        //{
+        //    objdatacontextclass.tblentry.Remove(cu);
+        //    objdatacontextclass.SaveChanges();
+        //    return Ok(cu);
+        //}
+        [HttpDelete("deleteentry/{id}")]
+        public async Task<ActionResult<Entry>> Deleteentry(int id)
+        {
+            var entry = await objdatacontextclass.tblentry.FindAsync(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            objdatacontextclass.tblentry.Remove(entry);
+            await objdatacontextclass.SaveChangesAsync();
+            return entry;
+        }
+
     }
 }

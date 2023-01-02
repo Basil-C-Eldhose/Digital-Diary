@@ -2,6 +2,7 @@
 using DiaryBackEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiaryBackEnd.Controllers
 {
@@ -14,7 +15,7 @@ namespace DiaryBackEnd.Controllers
         {
             this.dataContextClass = profilecontext;
         }
-        [HttpPost("Profile")]
+        [HttpPost("profile")]
         public async Task<ActionResult> Insprofile(Profile pr)
         {
             dataContextClass.tblprofile.Add(pr);
@@ -22,13 +23,16 @@ namespace DiaryBackEnd.Controllers
             return Ok(pr);
         }
         [HttpGet("Viewprofile/{id}")]
-          public IActionResult ViewProfile(int id)
+          public Profile ViewProfile(int id)
         {
+            var pro = dataContextClass.tblprofile.FromSqlRaw("select * from tblprofile where uid={0}", id).FirstOrDefault();
+            return pro;
            // return dataContextClass.tblprofile.ToList();
-            return Ok(dataContextClass.tblprofile.Find(id));
+            //return Ok(dataContextClass.tblprofile.);
+
         }
         [HttpPost("updateprofile")]
-        public async Task<ActionResult> Updprofile(Profile cu)
+        public async Task<ActionResult> profileupdate(Profile cu)
         {
             dataContextClass.tblprofile.Update(cu);
             await dataContextClass.SaveChangesAsync();
