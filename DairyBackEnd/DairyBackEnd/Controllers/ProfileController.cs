@@ -38,5 +38,6 @@ namespace DiaryBackEnd.Controllers
             await dataContextClass.SaveChangesAsync();
             return Ok(cu);
         }
+
     }
 }
