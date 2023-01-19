@@ -55,5 +55,17 @@ namespace DiaryBackEnd.Controllers
             return Ok(op);
 
         }
+        [HttpDelete("deleteexpenseentry/{id}")]
+        public async Task<ActionResult<Expense>> Deleteexpenentry(int id)
+        {
+            var entry = await objdataContextClass.tblexpense.FindAsync(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            objdataContextClass.tblexpense.Remove(entry);
+            await objdataContextClass.SaveChangesAsync();
+            return entry;
+        }
     }
 }
