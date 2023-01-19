@@ -4,6 +4,7 @@ using DairyBackEnd.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryBackEnd.Migrations
 {
     [DbContext(typeof(DataContextClass))]
-    partial class DataContextClassModelSnapshot : ModelSnapshot
+    [Migration("20230118164107_ExpenseMigration")]
+    partial class ExpenseMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,25 +45,6 @@ namespace DiaryBackEnd.Migrations
                     b.HasKey("uid");
 
                     b.ToTable("tblregistration");
-                });
-
-            modelBuilder.Entity("DiaryBackEnd.Models.Category", b =>
-                {
-                    b.Property<int>("cid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cid"));
-
-                    b.Property<string>("category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("uid")
-                        .HasColumnType("int");
-
-                    b.HasKey("cid");
-
-                    b.ToTable("tblcategory");
                 });
 
             modelBuilder.Entity("DiaryBackEnd.Models.Entry", b =>

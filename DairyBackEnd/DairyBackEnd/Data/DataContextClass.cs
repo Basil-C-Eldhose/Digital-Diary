@@ -15,5 +15,8 @@ namespace DairyBackEnd.Data
 
         public DbSet<Entry> tblentry { get; set; }
         public DbSet<Todo> tbltodo { get; set;}
+        public DbSet<Expense> tblexpense { get; set; }
+        public DbSet<Category> tblcategory { get; set; }
+
     }
 }
