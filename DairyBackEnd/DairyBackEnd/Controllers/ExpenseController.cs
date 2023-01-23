@@ -67,5 +67,17 @@ namespace DiaryBackEnd.Controllers
             await objdataContextClass.SaveChangesAsync();
             return entry;
         }
+        [HttpDelete("deletecategory/{id}")]
+        public async Task<ActionResult<Category>> Deletecateentry(int id)
+        {
+            var entry = await objdataContextClass.tblcategory.FindAsync(id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            objdataContextClass.tblcategory.Remove(entry);
+            await objdataContextClass.SaveChangesAsync();
+            return entry;
+        }
     }
 }
